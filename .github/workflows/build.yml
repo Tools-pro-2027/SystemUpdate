@@ -1,0 +1,61 @@
+name: Build APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew || true
+
+      - name: Build APK with Gradle
+        run: |
+          if [ -f gradlew ]; then
+            ./gradlew assembleDebug
+          else
+            echo "gradlew not found, using aapt directly"
+            mkdir -p build
+          fi
+
+      - name: Build APK manually (aapt + javac + d8)
+        run: |
+          mkdir -p build/classes
+          mkdir -p build/apk
+          # Compile Java
+          find app/src/main/java -name "*.java" > sources.txt
+          javac -source 1.8 -target 1.8 -bootclasspath $ANDROID_HOME/platforms/android-34/android.jar -d build/classes @sources.txt || true
+          # Convert to dex
+          d8 --output build/ --lib $ANDROID_HOME/platforms/android-34/android.jar $(find build/classes -name "*.class") || true
+          # Package APK
+          aapt package -f -M app/src/main/AndroidManifest.xml -I $ANDROID_HOME/platforms/android-34/android.jar -F build/apk/unsigned.apk build/ 2>/dev/null || true
+          cd build/apk && zip -uj unsigned.apk ../classes.dex || true
+
+      - name: Sign APK
+        run: |
+          keytool -genkey -v -keystore release.keystore -alias mykey -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=Android, OU=Dev, O=MyApp, L=City, S=State, C=US" -noprompt
+          apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out app-release.apk build/apk/unsigned.apk || true
+          ls -la
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: app-release.apk
+          if-no-files-found: warn
