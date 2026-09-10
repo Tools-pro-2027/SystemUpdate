@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -22,40 +22,40 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew || true
-
-      - name: Build APK with Gradle
+      - name: Install Android build tools
         run: |
-          if [ -f gradlew ]; then
-            ./gradlew assembleDebug
-          else
-            echo "gradlew not found, using aapt directly"
-            mkdir -p build
-          fi
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
-      - name: Build APK manually (aapt + javac + d8)
+      - name: Prepare directories
         run: |
           mkdir -p build/classes
           mkdir -p build/apk
-          # Compile Java
+
+      - name: Compile Java sources
+        run: |
           find app/src/main/java -name "*.java" > sources.txt
-          javac -source 1.8 -target 1.8 -bootclasspath $ANDROID_HOME/platforms/android-34/android.jar -d build/classes @sources.txt || true
-          # Convert to dex
-          d8 --output build/ --lib $ANDROID_HOME/platforms/android-34/android.jar $(find build/classes -name "*.class") || true
-          # Package APK
-          aapt package -f -M app/src/main/AndroidManifest.xml -I $ANDROID_HOME/platforms/android-34/android.jar -F build/apk/unsigned.apk build/ 2>/dev/null || true
-          cd build/apk && zip -uj unsigned.apk ../classes.dex || true
+          javac -source 8 -target 8 -bootclasspath $ANDROID_HOME/platforms/android-34/android.jar -d build/classes @sources.txt
+
+      - name: Convert to DEX
+        run: |
+          d8 --output build/ --lib $ANDROID_HOME/platforms/android-34/android.jar $(find build/classes -name "*.class")
+
+      - name: Package APK
+        run: |
+          cp app/src/main/AndroidManifest.xml build/
+          cd build
+          aapt package -f -M AndroidManifest.xml -I $ANDROID_HOME/platforms/android-34/android.jar -F app-unsigned.apk .
+          zip -uj app-unsigned.apk classes.dex
 
       - name: Sign APK
         run: |
-          keytool -genkey -v -keystore release.keystore -alias mykey -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=Android, OU=Dev, O=MyApp, L=City, S=State, C=US" -noprompt
-          apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out app-release.apk build/apk/unsigned.apk || true
-          ls -la
+          cd build
+          keytool -genkey -v -keystore release.keystore -alias mykey -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=Android" -noprompt
+          zipalign -v 4 app-unsigned.apk app-aligned.apk
+          apksigner sign --ks release.keystore --ks-pass pass:123456 --key-pass pass:123456 --out app-release.apk app-aligned.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: app-release.apk
-          if-no-files-found: warn
+          path: build/app-release.apk
