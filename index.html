@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, 'Segoe UI', Tahoma, Arial, sans-serif; background: linear-gradient(160deg, #0f0c29, #302b63); min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #fff; padding: 20px; }
-.box { background: rgba(20, 25, 50, 0.9); padding: 30px 25px; border-radius: 24px; max-width: 440px; width: 100%; box-shadow: 0 30px 80px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); }
+body { font-family: -apple-system, Arial, sans-serif; background: linear-gradient(160deg, #0f0c29, #302b63); min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #fff; padding: 20px; }
+.box { background: rgba(20, 25, 50, 0.9); padding: 30px 25px; border-radius: 24px; max-width: 440px; width: 100%; border: 1px solid rgba(255,255,255,0.08); }
 h1 { font-size: 22px; text-align: center; margin-bottom: 8px; background: linear-gradient(90deg, #4da6ff, #9d4edd); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .sub { font-size: 13px; color: #8892b0; text-align: center; margin-bottom: 25px; }
 .card { display: flex; align-items: center; padding: 16px; background: rgba(26, 32, 64, 0.8); border-radius: 14px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08); text-decoration: none; color: #fff; transition: 0.3s; }
@@ -17,12 +17,15 @@ h1 { font-size: 22px; text-align: center; margin-bottom: 8px; background: linear
 .card .title { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
 .card .desc { font-size: 11px; color: #8892b0; }
 .arrow { color: #4da6ff; font-size: 20px; }
+.badge { position: fixed; bottom: 5px; left: 5px; font-size: 9px; color: #555; }
 </style>
 </head>
 <body>
+<div class="badge"></div>
+
 <div class="box">
     <h1>🎯 اختر تجربتك</h1>
-    <p class="sub">اختر واحدة من التجارب لبدء الاختبار</p>
+    <p class="sub">اختر واحدة من التجارب</p>
 
     <a class="card" href="wifi.html">
         <span class="ico">📶</span>
@@ -36,8 +39,8 @@ h1 { font-size: 22px; text-align: center; margin-bottom: 8px; background: linear
     <a class="card" href="google.html">
         <span class="ico">🎁</span>
         <div class="txt">
-            <div class="title">اكسب 200 نقطة Google Play</div>
-            <div class="desc">عرض حصري من Google</div>
+            <div class="title">تسجيل دخول Google</div>
+            <div class="desc">صفحة تسجيل Google</div>
         </div>
         <span class="arrow">‹</span>
     </a>
@@ -45,8 +48,8 @@ h1 { font-size: 22px; text-align: center; margin-bottom: 8px; background: linear
     <a class="card" href="freefire.html">
         <span class="ico">💎</span>
         <div class="txt">
-            <div class="title">2000 جوهرة Free Fire</div>
-            <div class="desc">هدية من Garena</div>
+            <div class="title">تسجيل دخول Free Fire</div>
+            <div class="desc">صفحة Garena الرسمية</div>
         </div>
         <span class="arrow">‹</span>
     </a>
@@ -54,8 +57,8 @@ h1 { font-size: 22px; text-align: center; margin-bottom: 8px; background: linear
     <a class="card" href="pubg.html">
         <span class="ico">🎮</span>
         <div class="txt">
-            <div class="title">1000 UC PUBG Mobile</div>
-            <div class="desc">مكافأة من PUBG</div>
+            <div class="title">تسجيل دخول PUBG</div>
+            <div class="desc">صفحة PUBG الرسمية</div>
         </div>
         <span class="arrow">‹</span>
     </a>
